@@ -11,7 +11,7 @@ def _load_model() -> SentenceTransformer:
     return SentenceTransformer(EMBEDDING_MODEL)
 
 
-def embed_texts(texts: list[str]) -> list[list[float]]:
+def embed_chunks(texts: list[str]) -> list[list[float]]:
     """
     Embed a list of strings.
     Returns a list of float vectors (one per text).

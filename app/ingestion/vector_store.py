@@ -3,25 +3,21 @@ import uuid
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
     Distance, VectorParams,
-    PointStruct, Filter, FieldCondition, MatchValue, PayloadSchemaType
+    PointStruct, Filter, FieldCondition, MatchValue,
+    PayloadSchemaType,
 )
 from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY=os.environ.get("QDRANT_API_KEY")
-URL=os.environ.get("QDRANT_URL")
+API_KEY           = os.environ.get("QDRANT_API_KEY", "").strip() or None
+URL               = os.environ.get("QDRANT_URL")
 COLLECTION_NAME   = os.environ.get("QDRANT_COLLECTION", "documents")
 VECTOR_SIZE       = 384        # all-MiniLM-L6-v2 output dimension
 
 
 def get_client() -> QdrantClient:
-    qdrant_client = QdrantClient(
-        url=URL, 
-        api_key=API_KEY,
-    )
-
-    return qdrant_client
+    return QdrantClient(url=URL, api_key=API_KEY)
 
 
 def ensure_collection() -> None:
@@ -33,6 +29,8 @@ def ensure_collection() -> None:
             collection_name=COLLECTION_NAME,
             vectors_config=VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
         )
+
+    # Ensure payload index exists for filtering
     client.create_payload_index(
         collection_name=COLLECTION_NAME,
         field_name="source_file",

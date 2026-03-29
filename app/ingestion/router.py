@@ -1,67 +1,73 @@
+"""
+Ingestion Router — upload documents for parsing, chunking, and embedding.
+"""
+
 import logging
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, UploadFile, File, Query, HTTPException
 
 from app.ingestion.parser import parse_document
 from app.ingestion.chunker import chunk_text
-from app.ingestion.embedder import embed_texts
+from app.ingestion.embedder import embed_chunks
 from app.ingestion.vector_store import upsert_chunks, delete_document
 
 logger = logging.getLogger(__name__)
+
 router = APIRouter()
 
-SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".html", ".md", ".txt"}
 
-
-class IngestResponse(BaseModel):
-    filename: str
-    chunks_upserted: int
-    message: str
-
-
-@router.post("/", response_model=IngestResponse)
-async def ingest_document(file: UploadFile = File(...)):
+@router.post("/")
+async def ingest_document(
+    file: UploadFile = File(...),
+    tier: str = Query(
+        default="basic",
+        regex="^(basic|premium)$",
+        description="Parsing tier: 'basic' (text+tables) or 'premium' (+ image descriptions)",
+    ),
+):
     """
-    Upload a document → parse → chunk → embed → upsert to Qdrant.
-    """
-    filename = file.filename or "unknown"
-    ext = "." + filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
+    Ingest a document into the vector store.
 
-    if ext not in SUPPORTED_EXTENSIONS:
-        raise HTTPException(
-            status_code=415,
-            detail=f"Unsupported file type '{ext}'. Supported: {SUPPORTED_EXTENSIONS}"
-        )
+    1. Parse the file to markdown (basic or premium tier)
+    2. Chunk with table-aware splitting
+    3. Embed chunks
+    4. Upsert to Qdrant (deletes old chunks for same filename first)
+    """
+    filename = file.filename
+    logger.info("Ingesting '%s' with tier='%s'", filename, tier)
 
     try:
         file_bytes = await file.read()
 
-        logger.info(f"[ingest] Parsing {filename} ({len(file_bytes)} bytes)")
-        markdown = parse_document(file_bytes, filename)
+        # Parse
+        markdown = parse_document(file_bytes, filename, tier=tier)
+        if not markdown.strip():
+            raise HTTPException(status_code=400, detail="Document parsed to empty content.")
 
-        logger.info(f"[ingest] Chunking {filename}")
+        # Chunk (table-aware)
         chunks = chunk_text(markdown, source_file=filename)
-
         if not chunks:
-            raise HTTPException(status_code=422, detail="Document produced no text chunks.")
+            raise HTTPException(status_code=400, detail="No chunks produced from document.")
 
-        logger.info(f"[ingest] Embedding {len(chunks)} chunks")
-        embeddings = embed_texts([c.text for c in chunks])
+        logger.info("Produced %d chunks from '%s'", len(chunks), filename)
 
-        # Remove old version of the same file before upserting
+        # Embed
+        embeddings = embed_chunks([c.text for c in chunks])
+
+        # Delete old version if re-ingesting same file
         delete_document(filename)
 
-        logger.info(f"[ingest] Upserting to Qdrant")
-        count = upsert_chunks(chunks, embeddings, source_file=filename)
+        # Upsert
+        num_upserted = upsert_chunks(chunks, embeddings, source_file=filename)
 
-        return IngestResponse(
-            filename=filename,
-            chunks_upserted=count,
-            message="Document ingested successfully."
-        )
+        return {
+            "filename": filename,
+            "tier": tier,
+            "num_chunks": num_upserted,
+            "status": "ok",
+        }
 
     except HTTPException:
         raise
     except Exception as e:
-        logger.exception(f"[ingest] Failed for {filename}: {e}")
+        logger.exception("Ingestion failed for '%s'", filename)
         raise HTTPException(status_code=500, detail=str(e))

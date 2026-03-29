@@ -1,0 +1,131 @@
+
+Chunk: 00
+## Satellite-Based Analysis of Air Pollution over Major Indian Cities
+Chunk: 01
+NO 2 Tropospheric Column Density from Sentinel-5P TROPOMI January - December 2024
+
+| Course             | Satellite Data Analysis                                 |
+|--------------------|---------------------------------------------------------|
+| Subject            | Air Pollution Monitoring using Satellite Remote Sensing |
+| Satellite / Sensor | Copernicus Sentinel-5P / TROPOMI                        |
+| Parameter          | NO2 Tropospheric Column Density                         |
+| Data Period        | January 2024 - December 2024                            |
+| Spatial Coverage   | 10 Major Cities of India                                |
+| Data Level         | Level-3 Monthly Averaged Product                        |
+Chunk: 02
+## 1. Introduction
+
+Air pollution is one of the most pressing environmental challenges facing India. Rapid urbanization, industrial expansion, vehicular emissions, and seasonal agricultural stubble burning contribute to hazardous air quality levels across the country, particularly in the Indo-Gangetic Plain. Nitroge dioxide (NO 2 ) is a key tropospheric pollutant and a reliable indicator of anthropogenic combustion activities, including traffic, power generation, and industrial processes.
+
+The European Space Agency's Copernicus Sentinel-5P satellite, equipped with the TROPOspheric Monitoring  Instrument  (TROPOMI),  provides  daily  global  measurements  of  NO 2 tropospheric column  density  at  an  unprecedented  spatial  resolution  of  3.5  ×  5.5  km.  This  dataset  enables systematic  monitoring  of  urban  air  pollution  and  its  seasonal  variability.  The  present  analysi utilizes the Level-3 monthly averaged NO 2 product to examine pollution patterns across ten major Indian cities for the year 2024.
+
+## 2. Dataset Description
+Chunk: 03
+## 2. Dataset Description
+
+The  data  used  in  this  study  is  the Sentinel-5P  TROPOMI  Level-3  Monthly  Averaged  NO 2 Tropospheric  Column  Density product,  distributed  by  the  Copernicus  Atmosphere  Monitoring Service (CAMS). The values represent vertically integrated NO 2 concentrations in the troposphere, expressed in units of ×10 15 molecules/cm 2 .
+
+Data was extracted for ten major Indian cities by selecting the nearest satellite pixel to each c center.  The  cities  were  chosen  to  represent  geographic  diversity  across  northern,  southern, western, and eastern India.
+
+## 2.1 Study Area - City Coordinates
+Chunk: 04
+Table 1: Geographic coordinates of the ten study cities.
+
+|   # | City      |   Latitude (°N) |   Longitude (°E) | Region   |
+|-----|-----------|-----------------|------------------|----------|
+|   1 | Delhi     |           28.61 |            77.21 | North    |
+|   2 | Mumbai    |           19.08 |            72.88 | West     |
+|   3 | Kolkata   |           22.57 |            88.36 | East     |
+|   4 | Chennai   |           13.08 |            80.27 | South    |
+|   5 | Bangalore |           12.97 |            77.59 | South    |
+|   6 | Hyderabad |           17.39 |            78.49 | South    |
+|   7 | Ahmedabad |           23.02 |            72.57 | West     |
+|   8 | Pune      |           18.52 |            73.86 | West     |
+|   9 | Lucknow   |           26.85 |            80.95 | North    |
+|  10 | Jaipur    |           26.92 |            75.79 | North    |
+Chunk: 05
+## 2.2 Monthly NO 2 Data
+
+The table below presents the monthly NO 2 tropospheric column values (×10 15 molecules/cm all ten cities across 2024.
+Chunk: 06
+Table 2: Monthly NO 2 tropospheric column density (×10 15 molecules/cm 2 ) - Sentinel-5P TROPOMI, 2024.
+
+| City      |   Jan |   Feb |   Mar |   Apr |   May |   Jun |   Jul |   Aug |   Sep |   Oct |   Nov |   Dec |   Annual Mean |
+|-----------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|---------------|
+| Delhi     |  14.2 |  12.8 |  10.5 |   7.3 |   6.1 |   4.8 |   3.9 |   4.2 |   5.8 |   9.5 |  13.1 |  15.6 |           9   |
+| Mumbai    |   6.8 |   6.2 |   5.5 |   4.1 |   3.5 |   2.8 |   2.3 |   2.5 |   3.2 |   4.9 |   6.1 |   7.2 |           4.6 |
+| Kolkata   |   9.5 |   8.7 |   7.2 |   5.1 |   4.3 |   3.5 |   2.9 |   3.1 |   4.5 |   7.2 |   8.9 |  10.3 |           6.3 |
+| Chennai   |   4.8 |   4.5 |   4.1 |   3.5 |   3   |   2.5 |   2.2 |   2.4 |   2.9 |   3.8 |   4.4 |   5.1 |           3.6 |
+| Bangalore |   4.2 |   3.9 |   3.5 |   3   |   2.7 |   2.3 |   2   |   2.1 |   2.6 |   3.4 |   3.9 |   4.5 |           3.2 |
+| Hyderabad |   5.8 |   5.3 |   4.6 |   3.6 |   3.1 |   2.5 |   2.1 |   2.3 |   3   |   4.5 |   5.5 |   6.2 |           4   |
+Chunk: 07
+Table 2: Monthly NO 2 tropospheric column density (×10 15 molecules/cm 2 ) - Sentinel-5P TROPOMI, 2024.
+
+| City      |   Jan |   Feb |   Mar |   Apr |   May |   Jun |   Jul |   Aug |   Sep |   Oct |   Nov |   Dec |   Annual Mean |
+|-----------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|---------------|
+| Ahmedabad |   7.9 |   7.1 |   5.9 |   4.4 |   3.7 |   2.9 |   2.4 |   2.7 |   3.5 |   5.8 |   7.3 |   8.5 |           5.2 |
+| Pune      |   5.2 |   4.8 |   4.2 |   3.3 |   2.8 |   2.2 |   1.9 |   2.1 |   2.7 |   4   |   5   |   5.6 |           3.7 |
+| Lucknow   |  11.3 |  10.1 |   8.2 |   5.8 |   4.9 |   3.8 |   3.2 |   3.5 |   5   |   8   |  10.5 |  12.1 |           7.2 |
+| Jaipur    |   8.2 |   7.4 |   6.1 |   4.5 |   3.8 |   3   |   2.5 |   2.8 |   3.8 |   6.1 |   7.8 |   8.9 |           5.4 |
+Chunk: 08
+2
+
+) for
+
+## 3. Visualizations
+
+## 3.1 Monthly Variation of NO
+
+2
+
+Figure 1 presents the monthly time-series of NO 2 tropospheric column density for all ten cities. The seasonal cycle is clearly evident, with maximum concentrations observed during the winter months (November-January) and minimum values during the monsoon season (July-August).
+
+Figure 1: Monthly NO 2 tropospheric column density over 10 Indian cities (Sentinel-5P TROPOMI, 2024).
+
+<!-- image -->
+
+## 3.2 Annual Average Comparison
+
+Figure  2  ranks  the  cities  by  their  annual  mean  NO 2 levels.  Delhi  exhibits  the  highest  annual average,  significantly  exceeding  all  other  cities,  followed  by  Lucknow  and  Kolkata  in  the Indo-Gangetic Plain.
+
+Figure 2: Annual mean NO 2 levels across major Indian cities, ranked from highest to lowest (Sentinel-5P TROPOMI, 2024).
+
+<!-- image -->
+
+## 4. Results and Discussion
+Chunk: 09
+<!-- image -->
+
+## 4. Results and Discussion
+
+Seasonal Pattern: All ten cities exhibit a pronounced seasonal cycle in NO 2 concentrations. Peak values occur during the post-monsoon and winter months (October-January), driven by increased fossil fuel combustion for heating, thermal power generation, lower atmospheric boundary layer heights that trap pollutants, and, in northern India, agricultural residue burning October-November.  The  lowest  concentrations  are  observed  during  the  monsoon  season (June-August) due to washout by precipitation and enhanced atmospheric mixing.
+
+15
+
+duri
+
+Geographic  Disparity: Cities  in  the  Indo-Gangetic  Plain  -  Delhi  (annual  mean:  9.0  ×10 molecules/cm 2 ), Lucknow (7.2), and Kolkata (6.3) - record significantly higher NO 2 levels than southern Indian cities like Bangalore (3.2) and Chennai (3.6). This disparity is attributable to hig population  density,  extensive  industrial  activity,  coal-based  thermal  power  plants,  and  the basin-like topography of the IGP that inhibits pollutant dispersion.
+Chunk: 10
+Delhi - The Most Polluted City: Delhi consistently registers the highest NO 2 levels across all months, peaking at 15.6 ×10 15 molecules/cm 2 in December 2024. This aligns with its status as one of the most polluted cities globally, where vehicular emissions, industrial output, construction du and seasonal crop burning converge.
+
+Southern  Cities  Show  Lower  Pollution: Bangalore  and  Chennai  maintain  relatively  low  NO 2 levels throughout the year, with annual averages of 3.2 and 3.6 respectively. Factors include better ventilation  due  to  coastal  or  plateau  geography,  lower  reliance  on  coal-based  energy,  and comparatively lighter industrial emissions.
+
+## 5. Conclusion
+Chunk: 11
+## 5. Conclusion
+
+This analysis demonstrates the utility of Sentinel-5P TROPOMI satellite data for monitoring urban air pollution at the city scale. The results confirm that NO 2 concentrations over Indian cities strongly  governed  by  seasonal  meteorological  factors  (boundary  layer  dynamics,  monsoon washout) and anthropogenic emission sources (transport, industry, biomass burning). The stark contrast between northern and southern Indian cities underscores the need for region-specific air quality management strategies. Satellite remote sensing provides a powerful, cost-effective tool for tracking pollution trends and evaluating the effectiveness of clean-air policies over time.
+
+## 6. Data Source and References
+
+Primary Dataset: Copernicus Sentinel-5P TROPOMI Level-3 Monthly NO 2 Tropospheric Column product, accessed via the Copernicus Data Space Ecosystem (https://dataspace.copernicus.eu).
+
+## References:
+Chunk: 12
+## References:
+
+1. Veefkind, J.P. et al. (2012). TROPOMI on the ESA Sentinel-5 Precursor: A GMES mission for global observations of the atmospheric composition. Remote Sensing of Environment , 120, 70-83.
+2. Ghude, S.D. et al. (2008). Satellite observations of NO 2 over India. Atmospheric Environment 42(26), 6816-6828.
+3. Central Pollution Control Board (CPCB), India - National Air Quality Index (NAQI) Bulletins.
+
+,
